@@ -19,10 +19,10 @@
 <body>
   <div id="graph-container"></div>
 
-  <!-- Cargar sigma.js desde CDN -->
-  <script src="https://unpkg.com/sigma@2.3.0/build/sigma.min.js"></script>
-  <script src="https://unpkg.com/graphology@0.25.1/dist/graphology.min.js"></script>
-  <script src="https://unpkg.com/graphology-gexf/browser.js"></script>
+  <!-- Cargar sigma + graphology + gexf parser desde bundle de Sigma.js -->
+  <script src="https://cdn.jsdelivr.net/npm/sigma/build/sigma.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/graphology@0.25.1/dist/graphology.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/graphology-gexf@0.9.1/browser/graphology-gexf.min.js"></script>
 
   <script>
     fetch('ECA-autores02.gexf')
@@ -30,7 +30,7 @@
       .then(gexfText => {
         const parser = new DOMParser();
         const gexfDocument = parser.parseFromString(gexfText, "application/xml");
-        const graph = graphologyGexf.parse(gexfDocument);
+        const graph = window.graphologyGexf.parse(gexfDocument);
 
         const container = document.getElementById("graph-container");
         const renderer = new sigma.Sigma(graph, container);
@@ -41,3 +41,4 @@
   </script>
 </body>
 </html>
+
